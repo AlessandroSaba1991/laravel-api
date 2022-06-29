@@ -53,7 +53,7 @@ class PostController extends Controller
         $validate_data['user_id'] = Auth::user()->id;
         if ($request->hasFile('image')) {
             $request->validate([
-                'image' => 'nullable|image|max:300'
+                'image' => 'nullable|image|max:1000'
             ]);
             $path = Storage::put('posts_images', $request->image);
             $validate_data['image'] = $path;
@@ -103,7 +103,7 @@ class PostController extends Controller
         $validate_data['slug'] = Str::slug($request->title);
         if ($request->hasFile('image')) {
             $request->validate([
-                'image' => 'nullable|image|max:300'
+                'image' => 'nullable|image|max:1000'
             ]);
             Storage::delete($post->image);
             $path = Storage::put('posts_images', $request->image);

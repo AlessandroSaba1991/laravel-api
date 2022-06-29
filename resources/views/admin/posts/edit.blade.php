@@ -9,7 +9,7 @@
         <div class="form-group">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror" placeholder="Insert Title" aria-describedby="helpTitle" value="{{$post->title}}">
+                <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror" placeholder="Insert Title" aria-describedby="helpTitle" value="{{old('title',$post->title)}}">
                 @include('partials.single_errors',['variable' => 'title'])
             </div>
         </div>
@@ -39,7 +39,7 @@
             <option value="" disabled>Select a Tags</option>
             @forelse($tags as $tag)
             @if($errors->any())
-            <option value="{{$tag->id}}" {{in_array($tag->id,old('tags')) ? 'selected' : ''}}>{{$tag->name}}</option>
+            <option value="{{$tag->id}}" {{in_array($tag->id,old('tags',[])) ? 'selected' : ''}}>{{$tag->name}}</option>
             @else
             <option value="{{$tag->id}}" {{$post->tags->contains($tag->id) ? 'selected' : ''}}>{{$tag->name}}</option>
             @endif
